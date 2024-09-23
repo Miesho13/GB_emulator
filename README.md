@@ -1,4 +1,6 @@
-
+# Game Boy Emulator
+This project contain src code of game boy elmuation base on 8-bit cpu (similar
+to the Z80 processor.)
 
 # Game boy Specs
 * CPU: 8-bit (Similar to the Z80 processor.)
