@@ -7,5 +7,5 @@ SRC= src/main.c
 main:
 	${C_COMPILER} ${SRC} ${C_FLAGS} -o ${OUT_FILE}
 run:
-	./${OUT_FILE}
+	@./${OUT_FILE}
 
