@@ -4,16 +4,20 @@
 #include "GB_int.h"
 #include "mem.h"
 
-typedef struct {
-    byte_t A; byte_t F;
-    byte_t B; byte_t C;
-    byte_t D; byte_t E;
-    byte_t H; byte_t L;
-    word_t SP;
-    word_t PC;
+typedef union {
+    uint8_t u8[2];
+    uint16_t u16;
+} reg;
 
+typedef struct {
+    reg af;
+    reg bc;
+    reg de;
+    reg hl;
+    uint16_t sp;
+    uint16_t pc;
 } cpu_t;
 
-void cpu_step(cpu_t *cpu_ctx, mem_t *mem_ctx);
+void cpu_step(cpu_t *cpu, mem_t *mem);
 
 #endif
