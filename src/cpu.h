@@ -16,6 +16,7 @@ typedef struct {
     reg hl;
     uint16_t sp;
     uint16_t pc;
+    uint32_t cycle_delay;
 } cpu_t;
 
 void cpu_init();

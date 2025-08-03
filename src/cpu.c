@@ -20,6 +20,9 @@ static mem_t mem_;
 #define REG_SP cpu_.sp
 #define REG_PC cpu_.pc
 
+#define CYCLE_DLY(cycle) cpu_.cycle_delay = cycle
+#define CYCLE_DLY_CLEAR() cpu_.cycle_delay = 0
+
 #define memory(addr) mem_.buffer[addr]
 
 #define LD(L, R)  \
