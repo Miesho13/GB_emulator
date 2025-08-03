@@ -25,10 +25,17 @@ static mem_t mem_;
 
 #define memory(addr) mem_.buffer[addr]
 
-#define LD(L, R)  \
-    do {          \
-        L = R;    \
-    } while(0)    \
+/**
+ * LD OPERATION MACRO
+ * Put value nn into n
+ * Use with:
+ *     nn = B, C, D, E, H, L, BC, DE, HL, SP
+ *     n = 8 bit immediate value
+ * */
+#define LD(nn, n)  \
+    do {           \
+        nn = n;    \
+    } while(0)     \
 
 cpu_t* cpu_inst() {
     return &cpu_;
