@@ -23,5 +23,7 @@ int main(int argc, char **argv) {
     load_cartrigbe(&gb, argv[1]);
     gb_monitor(&gb);
 
+    cpu_step(NULL, NULL);
+
     return 0;
 }
