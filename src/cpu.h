@@ -18,6 +18,8 @@ typedef struct {
     uint16_t pc;
 } cpu_t;
 
+void cpu_init();
+cpu_t* cpu_inst();
 void cpu_step(cpu_t *cpu, mem_t *mem);
 
 #endif
