@@ -187,7 +187,7 @@ void cpu_step(cpu_t *cpu, mem_t *mem) {
         case 0x7e: {
             LD(
                 REG_A,
-                REG_HL
+                memory(REG_HL)
             );
             REG_PC += 1;
             CYCLE_DLY(8);
@@ -237,10 +237,508 @@ void cpu_step(cpu_t *cpu, mem_t *mem) {
         case 0x44: {
             LD(
                 REG_B,
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x45: {
+            LD(
+                REG_B,
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x46: {
+            LD(
+                REG_B,
+                memory(REG_HL)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x48: {
+            LD(
+                REG_C,
+                REG_B
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x49: {
+            LD(
+                REG_C,
+                REG_C
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x4A: {
+            LD(
+                REG_C,
+                REG_D
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x4B: {
+            LD(
+                REG_C,
                 REG_E
             );
             REG_PC += 1;
             CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x4C: {
+            LD(
+                REG_C,
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x4D: {
+            LD(
+                REG_C,
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+                   
+        case 0x4E: {
+            LD(
+                REG_C,
+                memory(REG_HL)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+                   
+        case 0x50: {
+            LD(
+                REG_D,
+                REG_B
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x51: {
+            LD(
+                REG_D,
+                REG_C
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x52: {
+            LD(
+                REG_D,
+                REG_D
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x53: {
+            LD(
+                REG_D,
+                REG_E
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x54: {
+            LD(
+                REG_D,
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x55: {
+            LD(
+                REG_D,
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+                   
+        case 0x56: {
+            LD(
+                REG_D,
+                memory(REG_HL)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+                   
+        case 0x58: {
+            LD(
+                REG_E,
+                REG_B
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x59: {
+            LD(
+                REG_E,
+                REG_C
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+                   
+        case 0x5A: {
+            LD(
+                REG_E,
+                REG_D
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x5B: {
+            LD(
+                REG_E,
+                REG_E
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x5C: {
+            LD(
+                REG_E,
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x5D: {
+            LD(
+                REG_E,
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x5E: {
+            LD(
+                REG_E,
+                memory(REG_HL)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x60: {
+            LD(
+                REG_H,
+                REG_B
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+                  
+        case 0x61: {
+            LD(
+                REG_H,
+                REG_C
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x62: {
+            LD(
+                REG_H,
+                REG_D
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x63: {
+            LD(
+                REG_H,
+                REG_E
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x64: {
+            LD(
+                REG_H,
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+                   
+        case 0x65: {
+            LD(
+                REG_H,
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x66: {
+            LD(
+                REG_H,
+                memory(REG_HL)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x68: {
+            LD(
+                REG_L,
+                REG_B
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x69: {
+            LD(
+                REG_L,
+                REG_C
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x6A: {
+            LD(
+                REG_L,
+                REG_D
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x6B: {
+            LD(
+                REG_L,
+                REG_E
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x6C: {
+            LD(
+                REG_L,
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x6D: {
+            LD(
+                REG_L,
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x6E: {
+            LD(
+                REG_L,
+                memory(REG_HL)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x70: {
+            LD(
+                REG_HL,
+                REG_B
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x71: {
+            LD(
+                memory(REG_HL),
+                REG_C
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x72: {
+            LD(
+                memory(REG_HL),
+                REG_D
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x73: {
+            LD(
+                memory(REG_HL),
+                REG_E
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x74: {
+            LD(
+                memory(REG_HL),
+                REG_H
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x75: {
+            LD(
+                memory(REG_HL),
+                REG_L
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x36: {
+            LD(
+                memory(REG_HL),
+                memory(REG_PC + 1);
+            );
+            REG_PC += 2;
+            CYCLE_DLY(12);
+            break;
+        }
+                   
+        case 0x0A: {
+            LD(
+                REG_A,
+                memory(REG_BC)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x1A: {
+            LD(
+                REG_A,
+                memory(REG_DE)
+            );
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0xFA: {
+
+            uint16_t nn = memory(REG_PC + 1);
+            nn = memory(REG_PC + 2) << 8;
+
+            LD(
+                REG_A,
+                memory(nn);
+            );
+
+            REG_PC += 3;
+            CYCLE_DLY(16);
+            break;
+        }
+
+        case 0x3e: {
+        // TODO: #?
+            LD(
+                REG_A,
+                memory(REG_PC + 1);
+            );
+
+            REG_PC += 2;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x3e: {
+            LD(
+                REG_A,
+                memory(REG_PC + 1);
+            );
+
+            REG_PC += 2;
+            CYCLE_DLY(8);
             break;
         }
     }
