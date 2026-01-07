@@ -32,10 +32,23 @@ static mem_t mem_;
  *     nn = B, C, D, E, H, L, BC, DE, HL, SP
  *     n = 8 bit immediate value
  * */
-#define LD(nn, n)  \
+#define LD(nn, n) nn = n
+
+#define DEC(n) --n 
+
+#define INC(n) ++n 
+
+/*
+* Description:
+*   Put A into memory address HL. Decrement HL.
+*   Same as: LD (HL),A - DEC HL
+*/
+#define LDD(nn, n) \
     do {           \
         nn = n;    \
+        n--;       \ 
     } while(0)     \
+
 
 cpu_t* cpu_inst() {
     return &cpu_;
@@ -720,7 +733,6 @@ void cpu_step(cpu_t *cpu, mem_t *mem) {
         }
 
         case 0x3e: {
-        // TODO: #?
             LD(
                 REG_A,
                 memory(REG_PC + 1);
@@ -731,16 +743,283 @@ void cpu_step(cpu_t *cpu, mem_t *mem) {
             break;
         }
 
-        case 0x3e: {
+        case 0x47: {
             LD(
-                REG_A,
-                memory(REG_PC + 1);
+                REG_B,
+                REG_A
             );
 
-            REG_PC += 2;
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x4f: {
+            LD(
+                REG_C,
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x57: {
+            LD(
+                REG_D,
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x5f: {
+            LD(
+                REG_E,
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x67: {
+            LD(
+                REG_H,
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x6f: {
+            LD(
+                REG_L,
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(4);
+            break;
+        }
+
+        case 0x02: {
+            LD(
+                memory(REG_BC),
+                REG_A
+            );
+
+            REG_PC += 1;
             CYCLE_DLY(8);
             break;
         }
+
+        case 0x12: {
+            LD(
+                memory(REG_DE),
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x77: {
+            LD(
+                memory(REG_HL),
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0xEA: {
+            uint16_t nn = memory(REG_PC + 1);
+            nn = memory(REG_PC + 2) << 8;
+
+            LD(
+                memory(nn),
+                REG_A
+            );
+
+            REG_PC += 3;
+            CYCLE_DLY(16);
+            break;
+        }
+                   
+        case 0xF2: {
+            LD(
+                REG_A,
+                memory(0xFF00 + memory(REG_C))
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0xE2: {
+            LD(
+                memory(0xFF00 + memory(REG_C)),
+                REG_A
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x3A: {
+            LD(
+                REG_A,
+                memory(REG_HL)
+            );
+
+            DEC(REG_HL);
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x32: {
+            LD(
+                memory(REG_HL),
+                REG_A
+            );
+
+            DEC(REG_HL);
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        // LDI
+        case 0x2A: {
+            LD(
+                REG_A,
+                memory(REG_HL)
+            );
+
+            INC(REG_HL);
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0x22: {
+            LD(
+                memory(REG_HL),
+                REG_A
+            );
+
+            INC(REG_HL);
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
+        case 0xE0: {
+            LD(
+                memory(0xFF00 + memory(REG_PC + 1)),
+                REG_A
+            );
+
+            REG_PC += 2;
+            CYCLE_DLY(12);
+            break;
+        }
+
+        case 0xF0: {
+            LD(
+                REG_A,
+                memory(0xFF00 + memory(REG_PC + 1))
+            );
+
+            REG_PC += 2;
+            CYCLE_DLY(12);
+            break;
+        }
+
+        case 0x01: {
+            uint16_t nn = memory(REG_PC + 1);
+            nn = memory(REG_PC + 2) << 8;
+
+            LD(
+                REG_BC,
+                nn
+            );
+
+            REG_PC += 3;
+            CYCLE_DLY(12);
+            break;
+        }
+
+        case 0x11: {
+            uint16_t nn = memory(REG_PC + 1);
+            nn = memory(REG_PC + 2) << 8;
+
+            LD(
+                REG_DE,
+                nn
+            );
+
+            REG_PC += 3;
+            CYCLE_DLY(12);
+            break;
+        }
+
+        case 0x21: {
+            uint16_t nn = memory(REG_PC + 1);
+            nn = memory(REG_PC + 2) << 8;
+
+            LD(
+                REG_HL,
+                nn
+            );
+
+            REG_PC += 3;
+            CYCLE_DLY(12);
+            break;
+        }
+
+        case 0x31: {
+            uint16_t nn = memory(REG_PC + 1);
+            nn = memory(REG_PC + 2) << 8;
+
+            LD(
+                REG_SP,
+                nn
+            );
+
+            REG_PC += 3;
+            CYCLE_DLY(12);
+            break;
+        }
+
+        case 0xF9: {
+            LD(
+                REG_SP,
+                REG_HL
+            );
+
+            REG_PC += 1;
+            CYCLE_DLY(8);
+            break;
+        }
+
     }
 }
 
